@@ -1,0 +1,114 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="carName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="show-history" (click)="showAuctionHistory(row)"> {{row.auction.carName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Fecha</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm> {{row.date | formatDate}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="carPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Precio Original</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm> $ {{row.auction.carPrice | formatNumber:'normal'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="administrativeCost">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Costos administrativos
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm> $ {{row.auction.administrativeCost | formatNumber:'normal'}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="commissionAuctioneerTotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Comisión Martillero
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm>
+        <span>
+          $ {{row.commissionAuctioneerTotal | formatNumber:'normal'}}
+        </span>
+        <span class="detail-history-table">
+          &nbsp; ({{row.auction.commissionAuctioneer}}%)
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="commissionAuctioneerIVATotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Comisión Martillero IVA
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm>
+        <span>
+          $ {{row.commissionAuctioneerIVATotal | formatNumber:'normal'}}
+        </span>
+        <span class="detail-history-table">
+          &nbsp; ({{row.auction.commissionAuctioneerIVA}}%)
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="commissionOneTotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Otros Uno</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm>
+        <span>
+          $ {{row.commissionOneTotal | formatNumber:'normal'}}
+        </span>
+        <span class="detail-history-table">
+          &nbsp; ({{row.auction.commissionOne}}%)
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="commissionTwo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Otros Dos</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm> $ {{row.auction.commissionTwo | formatNumber:'normal'}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs fxHide.sm> Precio Final</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs fxHide.sm><strong> $ {{row.total | formatNumber:'round'}}</strong>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef fxLayoutAlign="center center" fxFlex="120px"> Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxLayoutAlign="center" fxFlex="120px">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editAuctionHistory(row)">
+            <mat-icon>mode_edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteAuctionHistory(row)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <div *ngIf="auctionsHistory.length === 0 && loading" class="datatable-spinner">
+    <mat-spinner [diameter]="60"></mat-spinner>
+  </div>
+
+  <div *ngIf="auctionsHistory.length === 0 && !loading">
+    <p class="datatable-no-results">No hay resultados...</p>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+</div>

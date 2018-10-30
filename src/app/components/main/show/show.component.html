@@ -1,0 +1,94 @@
+<mat-toolbar color="primary" class="dialog-header">
+  <mat-toolbar-row fxLayoutGap="10px">
+    <mat-icon>directions_car</mat-icon>
+    <span>{{auctionHistory.auction.carName}}</span>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row fxLayoutGap="10px">
+    <mat-icon>attach_money</mat-icon>
+    <span>{{auctionHistory.total | formatNumber:'round'}}</span>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-dialog-content>
+
+  <div fxLayout="column">
+
+    <div fxLayoutGap="30px" fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout="column">
+
+      <div fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+        <div fxFlex="100">
+          <span class="primary-color">Precio Original</span>
+          <p>$ {{auctionHistory.auction.carPrice | formatNumber:'normal'}}</p>
+        </div>
+
+        <div fxFlex="100">
+          <span class="primary-color">Costos Administrativos</span>
+          <p>$ {{auctionHistory.auction.administrativeCost | formatNumber:'normal'}}</p>
+        </div>
+
+        <div fxFlex="100">
+          <span class="primary-color">Comisión Martillero</span>
+          <p>
+            $ {{auctionHistory.commissionAuctioneerTotal | formatNumber:'normal'}}
+            <span class="detail-history-table">
+          &nbsp; ({{auctionHistory.auction.commissionAuctioneer}}%)
+            </span>
+          </p>
+        </div>
+
+      </div>
+
+      <div fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+        <div fxFlex="100">
+          <span class="primary-color">Comisión Martillero IVA</span>
+          <p>
+            $ {{auctionHistory.commissionAuctioneerIVATotal | formatNumber:'normal'}}
+            <span class="detail-history-table">
+          &nbsp; ({{auctionHistory.auction.commissionAuctioneerIVA}}%)
+            </span>
+          </p>
+        </div>
+
+        <div fxFlex="100">
+          <span class="primary-color">Otros Uno</span>
+          <p>
+            $ {{auctionHistory.commissionOneTotal | formatNumber:'normal'}}
+            <span class="detail-history-table">
+          &nbsp; ({{auctionHistory.auction.commissionOne}}%)
+            </span>
+          </p>
+        </div>
+
+        <div fxFlex="100">
+          <span class="primary-color">Otros Dos</span>
+          <p>$ {{auctionHistory.auction.commissionTwo | formatNumber:'normal'}}</p>
+        </div>
+
+      </div>
+
+      <div fxLayoutGap.sm="10px" fxLayoutGap.xs="10px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+        <div fxFlex="100">
+          <span class="primary-color">Precio Final</span>
+          <p><strong> $ {{auctionHistory.total | formatNumber:'round'}}</strong></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions fxLayoutAlign="space-between">
+  <button mat-button mat-dialog-close color="primary" cdkFocusInitial>Volver</button>
+  <div class="dialog-header-date">
+    <mat-icon>access_time</mat-icon>
+    <span>{{auctionHistory.date | formatDate}}</span>
+  </div>
+</mat-dialog-actions>

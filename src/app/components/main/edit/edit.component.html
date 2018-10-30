@@ -1,0 +1,150 @@
+<mat-dialog-content [ngClass]="{'dialog-panel': loading}">
+
+  <div [ngClass]="{'dialog-content': loading}">
+
+    <h1 mat-dialog-title>Editar Registro</h1>
+
+    <div fxLayoutAlign="center center">
+
+      <p *ngIf="loading">Editando...</p>
+
+    </div>
+
+    <form [formGroup]="editFormValues" novalidate>
+
+      <div fxLayoutGap="30px" fxLayout="column" *ngIf="!loading">
+
+        <div fxLayoutGap="30px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Nombre del Auto</mat-label>
+            <input matInput placeholder="Nombre del Auto" formControlName="carName" required maxlength="100">
+            <mat-icon matPrefix>directions_car</mat-icon>
+            <mat-hint align="end">{{editFormValues.value.carName?.length ||
+              0}}/100
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.carName.invalid">
+              {{getErrorMessage('carName')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Precio del Auto</mat-label>
+            <input matInput type="number" placeholder="Precio del Auto" formControlName="carPrice" required
+                   maxlength="10">
+            <mat-icon matPrefix>attach_money</mat-icon>
+            <mat-hint align="end">{{editFormValues.value.carPrice?.length ||
+              0}}/10
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.carPrice.invalid">
+              {{getErrorMessage('carPrice')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Costos administrativos</mat-label>
+            <input matInput type="number" placeholder="Costos administrativos"
+                   formControlName="administrativeCost"
+                   required
+                   maxlength="10">
+            <mat-icon matPrefix>monetization_on</mat-icon>
+            <span matSuffix>%</span>
+            <mat-hint align="end">{{editFormValues.value.administrativeCost?.length ||
+              0}}/3
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.administrativeCost.invalid">
+              {{getErrorMessage('administrativeCost')}}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayoutGap="30px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Comisión Martillero</mat-label>
+            <input matInput type="number" placeholder="Comisión Martillero"
+                   formControlName="commissionAuctioneer"
+                   required
+                   maxlength="3">
+            <mat-icon matPrefix>gavel</mat-icon>
+            <span matSuffix>%</span>
+            <mat-hint align="end">{{editFormValues.value.commissionAuctioneer?.length ||
+              0}}/3
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.commissionAuctioneer.invalid">
+              {{getErrorMessage('commissionAuctioneer')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Comisión Martillero IVA</mat-label>
+            <input matInput type="number" placeholder="Comisión Martillero IVA"
+                   formControlName="commissionAuctioneerIVA" required
+                   maxlength="3">
+            <mat-icon matPrefix>gavel</mat-icon>
+            <span matSuffix>%</span>
+            <mat-hint align="end">{{editFormValues.value.commissionAuctioneerIVA?.length ||
+              0}}/3
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.commissionAuctioneerIVA.invalid">
+              {{getErrorMessage('commissionAuctioneerIVA')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Otros Uno</mat-label>
+            <input matInput type="number" placeholder="Otros Uno" formControlName="commissionOne"
+                   required
+                   maxlength="3">
+            <mat-icon matPrefix>compare_arrows</mat-icon>
+            <span matSuffix>%</span>
+            <mat-hint align="end">{{editFormValues.value.commissionOne?.length ||
+              0}}/3
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.commissionOne.invalid">
+              {{getErrorMessage('commissionOne')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Otros Dos</mat-label>
+            <input matInput type="number" placeholder="Otros Dos" formControlName="commissionTwo"
+                   required
+                   maxlength="10">
+            <mat-icon matPrefix>attach_money</mat-icon>
+            <mat-hint align="end">{{editFormValues.value.commissionTwo?.length ||
+              0}}/10
+            </mat-hint>
+            <mat-error *ngIf="editFormValues.controls.commissionTwo.invalid">
+              {{getErrorMessage('commissionTwo')}}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</mat-dialog-content>
+
+<mat-divider *ngIf="!loading"></mat-divider>
+
+<mat-dialog-actions fxLayoutAlign="end" fxLayoutAlign.sm="space-between" fxLayoutAlign.xs="space-between"
+                    *ngIf="!loading">
+
+  <button mat-button aria-label="Cancelar" color="primary" mat-dialog-close cdkFocusInitial>
+    CANCELAR
+  </button>
+  <button mat-button aria-label="Eliminar" color="primary" (click)="editAuction()">
+    EDITAR
+  </button>
+
+</mat-dialog-actions>
+
+<div fxLayoutAlign="center center" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

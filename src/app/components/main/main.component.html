@@ -1,0 +1,197 @@
+<div style="height: 91%;">
+
+  <mat-toolbar class="header-layout">
+
+    <div fxFlex="100" class="text-center">
+      <h1>
+        REMATE CALCULATOR - JUAN PIPA'S
+      </h1>
+    </div>
+
+  </mat-toolbar>
+
+  <div class="body-layout" fxLayout="column" fxFlexFill>
+
+    <mat-card fxFlex>
+
+
+      <mat-card-content>
+
+        <mat-accordion>
+
+          <form [formGroup]="mainFormValues" (ngSubmit)="onSubmit($event)">
+
+            <mat-expansion-panel [expanded]="true">
+
+              <mat-expansion-panel-header>
+                <strong class="primary-color">
+                  VALORES
+                </strong>
+              </mat-expansion-panel-header>
+
+              <div fxLayoutGap="30px" fxLayout="column">
+
+                <div fxLayoutGap="30px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Nombre del Auto</mat-label>
+                    <input matInput placeholder="Nombre del Auto" formControlName="carName" required maxlength="100">
+                    <mat-icon matPrefix>directions_car</mat-icon>
+                    <mat-hint align="end">{{mainFormValues.value.carName?.length ||
+                      0}}/100
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.carName.invalid">
+                      {{getErrorMessage('carName')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Precio del Auto</mat-label>
+                    <input matInput type="number" placeholder="Precio del Auto" formControlName="carPrice" required
+                           maxlength="10">
+                    <mat-icon matPrefix>attach_money</mat-icon>
+                    <mat-hint align="end">{{mainFormValues.value.carPrice?.length ||
+                      0}}/10
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.carPrice.invalid">
+                      {{getErrorMessage('carPrice')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Costos administrativos</mat-label>
+                    <input matInput type="number" placeholder="Costos administrativos"
+                           formControlName="administrativeCost"
+                           required
+                           maxlength="10">
+                    <mat-icon matPrefix>monetization_on</mat-icon>
+                    <span matSuffix>%</span>
+                    <mat-hint align="end">{{mainFormValues.value.administrativeCost?.length ||
+                      0}}/3
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.administrativeCost.invalid">
+                      {{getErrorMessage('administrativeCost')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+
+                <div fxLayoutGap="30px" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Comisión Martillero</mat-label>
+                    <input matInput type="number" placeholder="Comisión Martillero"
+                           formControlName="commissionAuctioneer"
+                           required
+                           maxlength="3">
+                    <mat-icon matPrefix>gavel</mat-icon>
+                    <span matSuffix>%</span>
+                    <mat-hint align="end">{{mainFormValues.value.commissionAuctioneer?.length ||
+                      0}}/3
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.commissionAuctioneer.invalid">
+                      {{getErrorMessage('commissionAuctioneer')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Comisión Martillero IVA</mat-label>
+                    <input matInput type="number" placeholder="Comisión Martillero IVA"
+                           formControlName="commissionAuctioneerIVA" required
+                           maxlength="3">
+                    <mat-icon matPrefix>gavel</mat-icon>
+                    <span matSuffix>%</span>
+                    <mat-hint align="end">{{mainFormValues.value.commissionAuctioneerIVA?.length ||
+                      0}}/3
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.commissionAuctioneerIVA.invalid">
+                      {{getErrorMessage('commissionAuctioneerIVA')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Otros Uno</mat-label>
+                    <input matInput type="number" placeholder="Otros Uno" formControlName="commissionOne"
+                           required
+                           maxlength="3">
+                    <mat-icon matPrefix>compare_arrows</mat-icon>
+                    <span matSuffix>%</span>
+                    <mat-hint align="end">{{mainFormValues.value.commissionOne?.length ||
+                      0}}/3
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.commissionOne.invalid">
+                      {{getErrorMessage('commissionOne')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field fxFlex="100" appearance="outline">
+                    <mat-label>Otros Dos</mat-label>
+                    <input matInput type="number" placeholder="Otros Dos" formControlName="commissionTwo"
+                           required
+                           maxlength="10">
+                    <mat-icon matPrefix>attach_money</mat-icon>
+                    <mat-hint align="end">{{mainFormValues.value.commissionTwo?.length ||
+                      0}}/10
+                    </mat-hint>
+                    <mat-error *ngIf="mainFormValues.controls.commissionTwo.invalid">
+                      {{getErrorMessage('commissionTwo')}}
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center center">
+
+                  <mat-slide-toggle (change)="setToggle($event)" checked>Agregar al historial</mat-slide-toggle>
+
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center center">
+
+                  <button mat-raised-button color="primary" [disabled]="mainFormValues.invalid" type="submit">
+                    Calcular
+                  </button>
+
+                </div>
+
+              </div>
+
+            </mat-expansion-panel>
+
+          </form>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+      <mat-card-content>
+
+        <mat-accordion>
+
+          <mat-expansion-panel [expanded]="true" [class.loading-content-history-panel]="loading">
+            <mat-expansion-panel-header>
+              <strong class="primary-color">
+                HISTORIAL
+              </strong>
+            </mat-expansion-panel-header>
+
+            <!-- TABLE -->
+            <div [class.loading-content-history-table]="loading">
+
+              <app-history></app-history>
+
+            </div>
+            <!-- / TABLE -->
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+
+</div>
+

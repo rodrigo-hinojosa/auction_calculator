@@ -1,0 +1,35 @@
+<mat-dialog-content [ngClass]="{'dialog-panel': loading}">
+
+  <div [ngClass]="{'dialog-content': loading}">
+
+    <h1 mat-dialog-title>Eliminar Registro</h1>
+
+    <div fxLayoutAlign="center center">
+
+      <p *ngIf="!loading">"{{auctionHistory.auction.carName}}"</p>
+
+      <p *ngIf="loading">Eliminando...</p>
+
+    </div>
+
+  </div>
+
+</mat-dialog-content>
+
+<mat-divider *ngIf="!loading"></mat-divider>
+
+<mat-dialog-actions fxLayoutAlign="end" fxLayoutAlign.sm="space-between" fxLayoutAlign.xs="space-between"
+                    *ngIf="!loading">
+
+  <button mat-button aria-label="Cancelar" color="primary" mat-dialog-close cdkFocusInitial>
+    CANCELAR
+  </button>
+  <button mat-button aria-label="Eliminar" color="primary" (click)="deleteActionHistory()">
+    ELIMINAR
+  </button>
+
+</mat-dialog-actions>
+
+<div fxLayoutAlign="center center" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

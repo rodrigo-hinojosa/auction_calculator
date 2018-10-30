@@ -1,1 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-center {
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.accent-color {
+  color: #FF4081 !important;
+}
+
+.primary-color {
+  color: #3F51B5 !important;
+}
+
+.warn-color {
+  color: #F44336 !important;
+}
+
+.body-layout {
+  padding: 1% 1% 1% 1%;
+}
+
+.header-layout {
+  text-align: center;
+  background: rgb(63, 81, 181);
+}
+
+.history-layout {
+  padding-top: 1%;
+}
+
+.dialog-header {
+  margin-bottom: 30px;
+}
+
+.show-content-layout {
+  padding-top: 2%;
+}
+
+.loading-content-history-panel {
+  cursor: wait;
+}
+
+.loading-content-history-table {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.show-history {
+  cursor: pointer;
+  color: #3F51B5 !important;
+}
+
+.detail-history-table {
+  font-size: 10px;
+  color: green;
+  padding-left: 5%;
+}
+
+.dialog-header-date {
+  font-size: 10px;
+  color: green;
+  display: flex;
+  align-items: center;
+}
+
+.dialog-panel {
+  cursor: wait;
+}
+
+.dialog-content {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.snackbar-success > .mat-simple-snackbar > .mat-simple-snackbar-action {
+  color: #23d60d !important;
+}
+
+.snackbar-error > .mat-simple-snackbar > .mat-simple-snackbar-action {
+  color: #f43939 !important;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #039be5;
+}
